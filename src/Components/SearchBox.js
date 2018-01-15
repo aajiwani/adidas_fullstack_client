@@ -1,16 +1,17 @@
-import React, { Component } from "react";
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 
 export default class SearchBox extends Component {
   constructor(...args) {
     super(...args);
     this.state = {
-      value: ""
+      value: '',
     };
   }
 
   handleChange(e) {
     this.setState({
-      value: e.target.value
+      value: e.target.value,
     });
   }
 
@@ -19,7 +20,7 @@ export default class SearchBox extends Component {
   }
 
   handleKeyPress(e) {
-    if (_.isEqual(e.key, "Enter")) {
+    if (_.isEqual(e.key, 'Enter')) {
       return this.state.value.length && this.searchProduct(this.state.value);
     }
   }
@@ -27,7 +28,7 @@ export default class SearchBox extends Component {
   clearTextField(e) {
     this.setState(
       {
-        value: ""
+        value: '',
       },
       () => {
         this.searchBox.focus();
@@ -51,8 +52,8 @@ export default class SearchBox extends Component {
             />
             <span
               className={
-                "form-control-clear glyphicon glyphicon-remove form-control-feedback " +
-                (!this.state.value.length ? "hidden" : "")
+                'form-control-clear glyphicon glyphicon-remove form-control-feedback ' +
+                (!this.state.value.length ? 'hidden' : '')
               }
               onClick={this.clearTextField.bind(this)}
             />
@@ -73,3 +74,7 @@ export default class SearchBox extends Component {
     );
   }
 }
+
+SearchBox.propTypes = {
+  onSearch: PropTypes.func,
+};
