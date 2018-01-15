@@ -1,0 +1,54 @@
+{
+  "name": "adidas_fullstack_client",
+  "version": "1.0.0",
+  "description": "A case study client to maintain wishlist, from items coming out of adidas search api",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "start": "webpack-dev-server --hot"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aajiwani/adidas_fullstack_client.git"
+  },
+  "keywords": [
+    "reactjs",
+    "webpack",
+    "eslint"
+  ],
+  "author": "Amir Ali Jiwani <amirali.jiwani89@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/aajiwani/adidas_fullstack_client/issues"
+  },
+  "homepage": "https://github.com/aajiwani/adidas_fullstack_client#readme",
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "generator-react-promised-component": "^0.1.1",
+    "jest": "^22.0.6",
+    "webpack": "^3.10.0",
+    "webpack-dev-server": "^2.11.0",
+    "yo": "^2.0.0"
+  },
+  "dependencies": {
+    "lodash": "^4.17.4",
+    "react": "^16.2.0",
+    "react-bootstrap": "^0.32.0",
+    "react-dom": "^16.2.0",
+    "react-promised-component": "^0.0.11",
+    "react-router-dom": "^4.2.2"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "jsx"
+    ],
+    "moduleDirectories": [
+      "node_modules",
+      "src"
+    ]
+  }
+}
