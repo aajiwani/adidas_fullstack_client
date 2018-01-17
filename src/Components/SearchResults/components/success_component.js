@@ -1,10 +1,20 @@
 import React, { Component } from "react";
 import { Media, Button } from "react-bootstrap";
 import _ from "lodash";
+import Results from "./Results";
 
 export default class SuccessComponent extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      results: []
+    };
+  }
+
+  componentWillMount() {
+    this.setState({
+      results: this.fetchProducts(this.props.result)
+    });
   }
 
   mergeSeperatedPrice(price) {
@@ -36,86 +46,21 @@ export default class SuccessComponent extends Component {
     return [];
   }
 
-  render() {
-    // this.props.result could be used to retrieve promise results
-    let results = this.fetchProducts(this.props.result);
-    if (results && results.length == 0)
-      return (
-        <div style={styles.resultBox}>
-          <p>No results found, try changing the search term</p>
-        </div>
-      );
-    else if (_.isEmpty(results)) return null;
+  handleAddToWishList(item) {
+    console.dir(item);
+  }
 
+  handleRemoveFromWishList(item) {
+    console.dir(item);
+  }
+
+  render() {
     return (
-      <div style={styles.resultBox}>
-        {_.map(results, (item, ind) => {
-          return (
-            <Media key={"result-" + ind} style={{marginTop: 15}}>
-              <Media.Left>
-                <img
-                  width={64}
-                  height={64}
-                  src={item.image}
-                  alt="Product Image"
-                />
-              </Media.Left>
-              <Media.Body>
-                <Media.Heading>
-                  {item.name}&nbsp;&nbsp;<a
-                    href={item.url}
-                    target="_blank"
-                    className="fa fa-external-link"
-                  />
-                </Media.Heading>
-                <span>{item.subName}</span>
-                <br />
-                <span>{item.price}</span>
-                <div>
-                  <span>
-                    {_.times(5, ind => {
-                      return (
-                        <span
-                          key={item.url + "-rating-" + ind}
-                          className={
-                            "fa fa-star" +
-                            (ind + 1 <= item.rating ? " checked" : "")
-                          }
-                        />
-                      );
-                    })}
-                  </span>
-                  <span style={{ paddingLeft: 10 }}>
-                    <i className="fa fa-user-circle" aria-hidden="true" />&nbsp;({
-                      item.reviews
-                    })
-                  </span>
-                  <br />
-                  <span>
-                    <a href="#">
-                      <i className="fa fa-heart-o" aria-hidden="true">
-                        &nbsp;Add to wishlist
-                      </i>
-                    </a>
-                  </span>
-                </div>
-              </Media.Body>
-            </Media>
-          );
-        })}
-      </div>
+      <Results
+        results={this.state.results}
+        addToWishList={this.handleAddToWishList.bind(this)}
+        removeFromWishList={this.handleRemoveFromWishList.bind(this)}
+      />
     );
   }
 }
-
-const styles = {
-  resultBox: {
-    flex: 1,
-    border: 2,
-    borderColor: "black",
-    borderStyle: "solid",
-    borderRadius: 10,
-    padding: 10,
-    marginTop: 20
-  }
-};
