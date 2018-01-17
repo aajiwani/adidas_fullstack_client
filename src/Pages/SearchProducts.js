@@ -13,7 +13,7 @@ export default class SearchProducts extends Component {
   }
 
   doSearch(productName) {
-    this.setState({productName: productName});
+    this.setState({productName: encodeURIComponent(productName)});
   }
 
   render() {

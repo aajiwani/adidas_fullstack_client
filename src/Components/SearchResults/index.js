@@ -5,8 +5,7 @@ import ErrorComponent from "../Error";
 import SuccessComponent from "./components/success_component.js";
 import _ from "lodash";
 import PropTypes from "prop-types";
-
-const SEARCH_API = "https://www.adidas.co.uk/api/suggestions/@searchTerm";
+import * as AdidasApi from "../../Lib/Api/AdidasApi";
 
 var PromisedReactComponent = ReactPromisedComponent(
   "promise_name",
@@ -31,10 +30,7 @@ export default class PromisedComponent extends React.Component {
 
   // Promise creator method
   promiseGenerator(params) {
-    if (params.searchTerm.length > 0)
-      return fetch(_.replace(SEARCH_API, "@searchTerm", params.searchTerm))
-      .then((response) => response.json());
-    else return Promise.resolve([]);
+    return AdidasApi.SearchForTerm(params.searchTerm);
   }
 
   // Method to supply parameters to promise method

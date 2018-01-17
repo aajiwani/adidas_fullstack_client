@@ -27,3 +27,7 @@
 .row {
   display: flex;
 }
+
+span.checked {
+  color: orange;
+}
