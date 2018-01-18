@@ -31,3 +31,46 @@
 span.checked {
   color: orange;
 }
+
+div.blurred{
+  -webkit-filter: blur(5px);
+  -moz-filter: blur(5px);
+  -o-filter: blur(5px);
+  -ms-filter: blur(5px);
+  filter: blur(5px);
+  width: 100%;
+    height: 100%;
+    background-color: #ccc;
+}
+
+/* p.overlay-blur {
+  top:50%;
+  width:100%;
+  color:white;
+  text-align: center;
+  text-shadow:1px 1px 2px black;
+  font-size:70px;
+  z-index: 1;
+  position: absolute;
+  text-align: center;
+} */
+
+#container {
+  height: 400px;
+  width: 400px;
+  position: relative;
+}
+#div {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+#text {
+  z-index: 100;
+  position: absolute;
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+  left: 150px;
+  top: 350px;
+}

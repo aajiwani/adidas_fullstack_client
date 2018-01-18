@@ -1,66 +1,79 @@
 import React, { Component } from "react";
-import { Media, Button } from "react-bootstrap";
 import _ from "lodash";
 import Results from "./Results";
+import {
+  AddToWishlist,
+  RemoveFromWishlist
+} from "../../../Lib/Api/WishlistApi";
+import {
+  removeFromWishlist,
+  addToWishlist
+} from "../../../Lib/ApiHelpers/WishlistHelper";
 
 export default class SuccessComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      results: []
+      results: [],
+      outerDivClass: "",
+      busyText: ""
     };
   }
 
   componentWillMount() {
     this.setState({
-      results: this.fetchProducts(this.props.result)
+      results: this.props.result
     });
   }
 
-  mergeSeperatedPrice(price) {
-    let formattedPrice = ["$", 0];
-    if (price.length == 2) {
-      for (var i = 0; i < 2; i++) {
-        if (price[i].isCurrency) formattedPrice[0] = price[i].value;
-        else formattedPrice[1] = price[i].value;
-      }
-    }
-    return _.join(formattedPrice, "");
+  enableBlurEffect(message) {
+    this.setState({
+      outerDivClass: "blurred",
+      busyText: message
+    });
   }
 
-  fetchProducts(result) {
-    if (_.has(result, "products")) {
-      return _.map(result.products, prod => {
-        return {
-          name: prod.suggestion,
-          image: prod.image,
-          url: prod.url,
-          rating: prod.rating,
-          reviews: prod.reviews || 0,
-          price: this.mergeSeperatedPrice(JSON.parse(prod.separatedSalePrice)),
-          subName: prod.subTitle
-        };
-      });
-    } else if (_.size(result) == 0) return null;
-
-    return [];
+  disableBlurEffect() {
+    this.setState({
+      outerDivClass: "",
+      busyText: ""
+    });
   }
 
   handleAddToWishList(item) {
-    console.dir(item);
+    this.enableBlurEffect("Adding ...");
+    AddToWishlist(item).then(() => {
+      this.disableBlurEffect();
+      this.setState({
+        results: addToWishlist(this.state.results, item)
+      });
+    });
   }
 
   handleRemoveFromWishList(item) {
-    console.dir(item);
+    this.enableBlurEffect("Removing ...");
+    RemoveFromWishlist(item.url).then(() => {
+      this.disableBlurEffect();
+      this.setState({
+        results: removeFromWishlist(this.state.results, item)
+      });
+    });
   }
 
   render() {
     return (
-      <Results
-        results={this.state.results}
-        addToWishList={this.handleAddToWishList.bind(this)}
-        removeFromWishList={this.handleRemoveFromWishList.bind(this)}
-      />
+      <div>
+        <div className={this.state.outerDivClass}>
+          <Results
+            results={this.state.results}
+            addToWishList={this.handleAddToWishList.bind(this)}
+            removeFromWishList={this.handleRemoveFromWishList.bind(this)}
+          />
+        </div>
+        {this.state.outerDivClass.length > 0 ? (
+          <p className={"overlay-blur"}>{this.busyText}</p>
+        ) : null}
+      </div>
     );
   }
 }

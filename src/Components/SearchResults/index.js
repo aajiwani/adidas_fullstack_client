@@ -6,6 +6,7 @@ import SuccessComponent from "./components/success_component.js";
 import _ from "lodash";
 import PropTypes from "prop-types";
 import * as AdidasApi from "../../Lib/Api/AdidasApi";
+import { GetWishlist } from "../../Lib/Api/WishlistApi";
 
 var PromisedReactComponent = ReactPromisedComponent(
   "promise_name",
@@ -30,7 +31,14 @@ export default class PromisedComponent extends React.Component {
 
   // Promise creator method
   promiseGenerator(params) {
-    return AdidasApi.SearchForTerm(params.searchTerm);
+    if (_.size(params.searchTerm))
+    {
+      return GetWishlist()
+      .then((wishlist) => {
+        return AdidasApi.SearchForTerm(params.searchTerm, wishlist);
+      });
+    }
+    return Promise.resolve(null);
   }
 
   // Method to supply parameters to promise method

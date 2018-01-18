@@ -1,12 +1,19 @@
+function checkForStatusErrors(response) {
+  if (!response.ok) throw new Error(response.statusText);
+  return response;
+}
+
 class ApiCaller {
   Get(url) {
     return fetch(url, {
       method: "get",
       headers: {
         Accept: "application/json",
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
-    });
+        "Content-Type": "application/x-www-form-urlencoded"
+      }
+    })
+      .then(response => checkForStatusErrors(response))
+      .then(response => response.json());
   }
 
   Post(url, params) {
@@ -24,10 +31,12 @@ class ApiCaller {
       method: "post",
       headers: {
         Accept: "application/json",
-        "Content-Type": "application/x-www-form-urlencoded",
+        "Content-Type": "application/x-www-form-urlencoded"
       },
-      body: formBody,
-    });
+      body: formBody
+    })
+      .then(response => checkForStatusErrors(response))
+      .then(response => response.json());
   }
 
   Put(url, params) {
@@ -45,10 +54,12 @@ class ApiCaller {
       method: "put",
       headers: {
         Accept: "application/json",
-        "Content-Type": "application/x-www-form-urlencoded",
+        "Content-Type": "application/x-www-form-urlencoded"
       },
-      body: formBody,
-    });
+      body: formBody
+    })
+      .then(response => checkForStatusErrors(response))
+      .then(response => response.json());
   }
 
   Delete(url) {
@@ -56,9 +67,11 @@ class ApiCaller {
       method: "delete",
       headers: {
         Accept: "application/json",
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
-    });
+        "Content-Type": "application/x-www-form-urlencoded"
+      }
+    })
+      .then(response => checkForStatusErrors(response))
+      .then(response => response.json());
   }
 }
 

@@ -61,11 +61,25 @@ export default class Results extends Component {
                   </span>
                   <br />
                   <span>
-                    <a href="#" onClick={() => this.props.addToWishList(item)}>
-                      <i className="fa fa-heart-o" aria-hidden="true">
-                        &nbsp;Add to wishlist
-                      </i>
-                    </a>
+                    {item.in_wishlist ? (
+                      <a
+                        href="#"
+                        onClick={() => this.props.removeFromWishList(item)}
+                      >
+                        <i className="fa fa-heart" aria-hidden="true">
+                          &nbsp;Remove from wishlist
+                        </i>
+                      </a>
+                    ) : (
+                      <a
+                        href="#"
+                        onClick={() => this.props.addToWishList(item)}
+                      >
+                        <i className="fa fa-heart-o" aria-hidden="true">
+                          &nbsp;Add to wishlist
+                        </i>
+                      </a>
+                    )}
                   </span>
                 </div>
               </Media.Body>
