@@ -1,6 +1,5 @@
 import ApiCaller from "./ApiCaller";
 import { formatWishListItem } from "../ApiHelpers/WishlistHelper";
-import _ from "lodash";
 
 const BASE_URL = "http://localhost:3000/api/";
 const RESOURCE_WISHLIST = "Wishlists";
