@@ -24,3 +24,5 @@ Full stack engineer case study
     - ```yarn start```
     &nbsp;&nbsp;or&nbsp;&nbsp;
     ```npm start```
+
+    - Note: Server url could be changed under .babelrc easily

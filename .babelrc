@@ -13,5 +13,13 @@
       "presets": [["env"], "react"]
     }
   },
-  "plugins": ["transform-object-rest-spread"]
+  "plugins": [
+    "transform-object-rest-spread",
+    [
+      "inline-replace-variables",
+      {
+        "__API_SERVER__": "http://localhost:3000/api/"
+      }
+    ]
+  ]
 }

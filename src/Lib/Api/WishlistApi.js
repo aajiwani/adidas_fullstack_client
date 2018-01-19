@@ -1,7 +1,7 @@
 import ApiCaller from "./ApiCaller";
 import { formatWishListItem } from "../ApiHelpers/WishlistHelper";
 
-const BASE_URL = "http://localhost:3000/api/";
+const BASE_URL = __API_SERVER__;
 const RESOURCE_WISHLIST = "Wishlists";
 
 export function AddToWishlist(product) {
