@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Media, Button, Glyphicon } from "react-bootstrap";
+import { Media } from "react-bootstrap";
 
 export default class Results extends Component {
   constructor(...args) {
@@ -12,18 +12,7 @@ export default class Results extends Component {
       return (
         <div style={styles.resultBox}>
           <p>Nothing yet in the wishlist</p>
-          <p>
-            Add something via searching
-            <Button
-              bsStyle="warning"
-              bsSize="small"
-              onClick={() => {
-                alert("Go to wishlist");
-              }}
-            >
-              <Glyphicon glyph="search" />
-            </Button>
-          </p>
+          <p>Try the search and add some items to the wishlist</p>
         </div>
       );
 
@@ -93,7 +82,6 @@ export default class Results extends Component {
 
 Results.propTypes = {
   results: PropTypes.array,
-  addToWishList: PropTypes.func.isRequired,
   removeFromWishList: PropTypes.func.isRequired
 };
 

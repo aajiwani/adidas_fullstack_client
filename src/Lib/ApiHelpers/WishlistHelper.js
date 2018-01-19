@@ -11,7 +11,7 @@ export function MarkItemsFromWishlist(searchResult, wishlist) {
   });
 }
 
-export function removeFromWishlist(searchResult, removedItem) {
+export function removeSearchedItemFromWishlist(searchResult, removedItem) {
   return _.map(searchResult, item => {
     if (_.isEqual(item.url, removedItem.url)) {
       return { ...item, in_wishlist: false };
@@ -20,13 +20,17 @@ export function removeFromWishlist(searchResult, removedItem) {
   });
 }
 
-export function addToWishlist(searchResult, addedItem) {
+export function addSearchedItemToWishlist(searchResult, addedItem) {
   return _.map(searchResult, item => {
     if (_.isEqual(item.url, addedItem.url)) {
       return { ...item, in_wishlist: true };
     }
     return { ...item };
   });
+}
+
+export function removeFromWishlist(wishlist, removedItem) {
+  return _.filter(wishlist, item => !_.isEqual(item.url, removedItem.url));
 }
 
 export function formatWishListItem(product) {

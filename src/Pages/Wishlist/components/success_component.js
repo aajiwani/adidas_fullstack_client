@@ -1,4 +1,7 @@
 import React from "react";
+import { RemoveFromWishlist } from "../../../Lib/Api/WishlistApi";
+import { removeFromWishlist } from "../../../Lib/ApiHelpers/WishlistHelper";
+import Results from "./Results";
 
 export default class SuccessComponent extends React.Component {
   constructor(props) {
@@ -46,7 +49,6 @@ export default class SuccessComponent extends React.Component {
         <div className={this.state.outerDivClass}>
           <Results
             results={this.state.results}
-            addToWishList={this.handleAddToWishList.bind(this)}
             removeFromWishList={this.handleRemoveFromWishList.bind(this)}
           />
         </div>
@@ -55,12 +57,5 @@ export default class SuccessComponent extends React.Component {
         ) : null}
       </div>
     );
-  }
-}
-
-
-  render() {
-    // this.props.result could be used to retrieve promise results
-    return null;
   }
 }

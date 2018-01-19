@@ -1,13 +1,12 @@
 import React, { Component } from "react";
-import _ from "lodash";
 import Results from "./Results";
 import {
   AddToWishlist,
   RemoveFromWishlist
 } from "../../../Lib/Api/WishlistApi";
 import {
-  removeFromWishlist,
-  addToWishlist
+  removeSearchedItemFromWishlist,
+  addSearchedItemToWishlist
 } from "../../../Lib/ApiHelpers/WishlistHelper";
 
 export default class SuccessComponent extends Component {
@@ -45,7 +44,7 @@ export default class SuccessComponent extends Component {
     AddToWishlist(item).then(() => {
       this.disableBlurEffect();
       this.setState({
-        results: addToWishlist(this.state.results, item)
+        results: addSearchedItemToWishlist(this.state.results, item)
       });
     });
   }
@@ -55,7 +54,7 @@ export default class SuccessComponent extends Component {
     RemoveFromWishlist(item.url).then(() => {
       this.disableBlurEffect();
       this.setState({
-        results: removeFromWishlist(this.state.results, item)
+        results: removeSearchedItemFromWishlist(this.state.results, item)
       });
     });
   }
